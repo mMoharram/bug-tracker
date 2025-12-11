@@ -50,6 +50,11 @@ pipeline {
                     '''
                 }
             }
+            post {
+                always {
+                    junit 'bugtracker-frontend/test-result.xml'
+                }
+            }
         
         
         }
