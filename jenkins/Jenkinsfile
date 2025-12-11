@@ -10,8 +10,20 @@ pipeline {
                 }
             }
             steps {
-                dir('bugtracker-backend') {
-                    sh 'go test -v ./...'
+                // dir('bugtracker-backend') {
+                //     sh 'go test -v ./...'
+                // }
+                script {
+                    // create a writable cache directory
+                    sh 'mkdir -p $WORKSPACE/.gocache'
+                    sh 'export GOCACHE=$WORKSPACE/.gocache'
+
+                    dir('bugtracker-backend') {
+                        sh '''
+                            export GOCACHE=$WORKSPACE/.gocache
+                            go test -v ./...
+                        '''
+                    }
                 }
             }
         }
