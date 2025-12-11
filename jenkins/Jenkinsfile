@@ -14,13 +14,21 @@ pipeline {
                 //     sh 'go test -v ./...'
                 // }
                 script {
-                    // create a writable cache directory
-                    sh 'mkdir -p $WORKSPACE/.gocache'
-                    sh 'export GOCACHE=$WORKSPACE/.gocache'
+                    sh '''
+                        mkdir -p $WORKSPACE/.gocache
+                        mkdir -p $WORKSPACE/.gomod
+                        mkdir -p $WORKSPACE/.gopath
+
+                        export GOCACHE=$WORKSPACE/.gocache
+                        export GOMODCACHE=$WORKSPACE/.gomod
+                        export GOPATH=$WORKSPACE/.gopath
+                    '''
 
                     dir('bugtracker-backend') {
                         sh '''
                             export GOCACHE=$WORKSPACE/.gocache
+                            export GOMODCACHE=$WORKSPACE/.gomod
+                            export GOPATH=$WORKSPACE/.gopath
                             go test -v ./...
                         '''
                     }
