@@ -38,6 +38,6 @@ jobs:
 
       - name: Execute Frontend Unit Tests
         working-directory: ./bugtracker-frontend
-        runs: 
+        run: 
           npm ci 
           npm test 
