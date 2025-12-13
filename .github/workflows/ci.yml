@@ -36,32 +36,11 @@ jobs:
           cache: "npm"
           cache-dependency-path: bugtracker-frontend/package-lock.json
 
-      - name: Install dependencies
+      - name: Execute Frontend Unit Tests
         working-directory: ./bugtracker-frontend
-        run: npm ci
-
-      - name: Run tests with explicit JUnit output
-        working-directory: ./bugtracker-frontend
-        run: |
-          # Clean up any previous test results
-          rm -f test-results.xml junit.xml 2>/dev/null || true
-          
-          # Run tests with explicit JUnit configuration
-          npx jest \
-            --ci \
-            --coverage \
-            --coverageReporters=text-summary \
-            --coverageReporters=text \
-            --coverageReporters=html \
-            --reporters=default \
-            --reporters=jest-junit \
-            --testResultsProcessor=jest-junit
-          
-          echo "=== Checking for generated files ==="
-          find . -name "*.xml" -type f | while read file; do
-            echo "Found XML file: $file"
-            ls -la "$file"
-          done
+        run: 
+          npm ci 
+          npm test 
 
       - name: Publish Frontend Test Results
         uses: dorny/test-reporter@v1
@@ -69,4 +48,4 @@ jobs:
         with:
           name: Frontend Unit Tests Report
           path: bugtracker-frontend/test-results.xml
-          reporter: jest-junit
+          reporter: jest-junit 

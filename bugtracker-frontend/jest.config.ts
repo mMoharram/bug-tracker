@@ -12,17 +12,7 @@ const config: Config = {
     "^@/components/(.*)$": "<rootDir>/components/$1",
     "^@/pages/(.*)$": "<rootDir>/pages/$1",
   },
-  reporters: [
-    "default",
-    ["jest-junit", {
-      outputDirectory: ".",
-      outputName: "test-results.xml",
-      classNameTemplate: "{classname} - {title}",
-      titleTemplate: "{classname} - {title}",
-      ancestorSeparator: " › ",
-      usePathForSuiteName: true
-    }]
-  ],
+  reporters: ["default", "jest-junit"],
 };
 
 export default createJestConfig(config);
