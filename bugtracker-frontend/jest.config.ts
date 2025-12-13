@@ -14,13 +14,14 @@ const config: Config = {
   },
   reporters: [
     "default",
-    [
-      "jest-junit",
-      {
-        outputDirectory: "<rootDir>",
-        outputName: "test-results.xml",
-      },
-    ],
+    ["jest-junit", {
+      outputDirectory: ".",
+      outputName: "test-results.xml",
+      classNameTemplate: "{classname} - {title}",
+      titleTemplate: "{classname} - {title}",
+      ancestorSeparator: " › ",
+      usePathForSuiteName: true
+    }]
   ],
 };
 
