@@ -43,7 +43,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'bugtracker-backend/test-results.xml'
+                    junit 'bugtracker-backend/test-results.xml',
                     pulishHTML target: {
                         reportDir: 'bugtracker-backend/reports',
                         reportFiles: 'coverage.html',
