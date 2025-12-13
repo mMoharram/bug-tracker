@@ -44,7 +44,7 @@ pipeline {
             post {
                 always {
                     junit 'bugtracker-backend/test-results.xml',
-                    pulishHTML target: {
+                    publishHTML target: {
                         reportDir: 'bugtracker-backend/reports',
                         reportFiles: 'coverage.html',
                         reportName: 'Backend Coverage Report'
