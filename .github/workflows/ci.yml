@@ -122,10 +122,10 @@ jobs:
     run-on: ubuntu-latest
 
     steps: 
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Launch Applicaiton
-      run: |
-        docker compose up --build -d 
-        npx wait-port http://localhost:8080/api/health -t 30000
+      - name: Launch Applicaiton
+        run: |
+          docker compose up --build -d 
+          npx wait-port http://localhost:8080/api/health -t 30000
