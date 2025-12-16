@@ -212,24 +212,21 @@ jobs:
           name: performance-report
           path: perf-results.html
           retention-days: 30
-      # - name: Generate Performance HTML Report
-      #   run: |
-      #     npx k6-reporter summary.json --output perf-results.html
 
 
 
-      # - name: Publish API Test Results
-      #   uses: dorny/test-reporter@v1
-      #   if: always()
-      #   with: 
-      #     name: API Tests Report
-      #     path: ./test-api/test-results/*.xml
-      #     reporter: jest-junit
+      - name: Publish API Test Results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with: 
+          name: API Tests Report
+          path: ./test-api/test-results/*.xml
+          reporter: jest-junit
 
-      # - name: Publish E2E Test Results
-      #   uses: dorny/test-reporter@v1
-      #   if: always()
-      #   with: 
-      #     name: API Tests Report
-      #     path: ./test-e2e/test-results/results.xml
-      #     reporter: jest-junit
+      - name: Publish E2E Test Results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with: 
+          name: API Tests Report
+          path: ./test-e2e/test-results/results.xml
+          reporter: jest-junit
