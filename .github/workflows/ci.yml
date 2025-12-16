@@ -148,11 +148,15 @@ jobs:
       - name: Setup K6
         uses: grafana/setup-k6-action@v1
 
+      # - name: Run Performance Tests
+      #   uses: grafana/setup-k6-action@v1
+      #   with: 
+      #     path: tests-perf/script.js
+      #     flags: --out json=summary.json
       - name: Run Performance Tests
-        uses: grafana/setup-k6-action@v1
-        with: 
-          path: tests-perf/script.js
-          flags: --out json=summary.json
+        run: |
+          k6 run tests-perf/script.js \
+            --summary-export=summary.json
 
       - name: Shut Down Applicaiton
         run: docker compose down 
@@ -197,14 +201,16 @@ jobs:
           path: summary.json
           retention-days: 30
 
-      - name: Upload Performance HTML Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with: 
-          name: performance-report
-          path: perf-results.html
-          retention-days: 30
-
+      # - name: Upload Performance HTML Report
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with: 
+      #     name: performance-report
+      #     path: perf-results.html
+      #     retention-days: 30
+      - name: Generate Performance HTML Report
+        run: |
+          npx k6-reporter summary.json --output perf-results.html
 
 
 
