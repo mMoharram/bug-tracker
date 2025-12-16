@@ -48,7 +48,6 @@ jobs:
       - name: Publish backend test results
         if: github.event_name == 'push'
         uses: dorny/test-reporter@v1
-        if: always()
         with: 
           name: Backend Unit Tests Report
           path: bugtracker-backend/test-results.xml
